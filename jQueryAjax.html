@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- <script src="..."></script>  引入jQuery-->
+
+    <script>
+        // $.ajax({
+        //     type: 'POST',
+        //     url: 'http://www.baidu.com',
+        //     data: {
+        //         name: 'xux'
+        //     },
+        //     dataType: 'JSON',
+        //     success: function() {},
+        //     error: function() {},
+        //     complete: function() {}
+        // })
+
+        // $.post('http://www.baidu.com', {
+        //     name: 'xux'
+        // }, function(data) {
+        //     console.log(data)
+        // })
+
+        // $.get('http://www.baidu.com?name=xux', function(data) {
+        //     console.log(data)
+        // })
+
+
+        function formatData(obj) {
+            var str = ''
+            for (key in obj) {
+                str += `${key}=${obj[key]}&`
+            }
+            return str.replace(/&$/, '')
+        }
+        console.log(formatData({
+            a: 1,
+            b: 2
+        }))
+    </script>
+</body>
+
+</html>

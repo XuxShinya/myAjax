@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var xhr;
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest()
+        } else if (window.ActiveXObject) {
+            xhr = new ActiveXObject('Microsoft.XMLHTTP') //兼容IE6
+        } else {
+            throw new Error('您的浏览器不支持异步请求数据')
+        }
+        console.log(xhr.readyState) //0 请求未初始化，还没有调用open（）
+        xhr.open('GET', 'http://www.someURL.com?params1=1&params2=2', true)
+        console.log(xhr.readyState) //1 请求已经建立，但还没有发送，即还没有调用send（）
+        xhr.send()
+
+        /*
+        // 若使用post请求获取数据则：
+        xhr.open('POST','www.someURL.com',true)
+        // 1.需要设置请求头，使其知晓是POST请求
+        xhr.setRequestHeader('Content-type','application/x-www-form-urlencoded')
+        // 2.需要将参数按照如下的格式写在send()中，不能以对象形式。
+        xhr.send('params1=1&params2=2')
+        */
+
+        xhr.onreadystatechange = function() {
+            console.log(xhr.readyState)
+                /*
+                2 请求已经发送，正在处理中 
+                3 请求在处理中，通常响应中有部分数据可用，但还没有全部完成
+                4 请求已经完成，可以查看和使用服务器响应的全部数据
+                */
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                console.log(JSON.parse(xhr.responseText))
+            }
+        }
+    </script>
+</body>
+
+</html>
